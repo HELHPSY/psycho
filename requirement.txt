@@ -1,2 +1,2 @@
 streamlit=1.44.1
-streamlit_cookies_manager=0.2.0
+streamlit_cookies_manager>=0.3.0

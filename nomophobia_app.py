@@ -1,5 +1,5 @@
 import streamlit as st
-from streamlit_cookies_manager import EncryptedCookieManager
+from streamlit_cookies_manager import Cookies
 # Page config
 st.set_page_config(
     page_title="مقياس النوموفوبيا",
@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-cook = EncryptedCookieManager(prefix="nomophobia_app" , password="fghhhjfjfhjvhfgc")
+cook = Cookies() 
 # Custom CSS to support RTL (Right-to-Left) for Arabic
 st.markdown("""
 <style>
@@ -38,10 +38,7 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-if not cook.ready():
-    st.spinner()
-    st.stop()
-print(cook.get("visited"))
+cook.load()
 if cook.get("visited") == 'true': 
     st.error("الرجاء تحديث الصفحة")
     st.stop()
@@ -146,7 +143,7 @@ with tab1[0]:
             file2.write(f"{reponse_21}\n")
 
             
-            cook["visited"] = "true" 
+            cook.set("visited" , "true")
             cook.save()
             st.success("تم الحفظ بنجاح")
             st.stop()

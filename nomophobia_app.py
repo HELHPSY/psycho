@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit_cookies_manager as cookies
 # Page config
 st.set_page_config(
     page_title="مقياس النوموفوبيا",
@@ -7,16 +6,9 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-cookies = cookies.EncryptedCookieManager(
-    # This prefix will get added to all your cookie names.
-    # This way you can run your app on Streamlit Cloud without cookie name clashes with other apps.
-    prefix="ktosiek/streamlit-cookies-manager/",
-    # You should really setup a long COOKIES_PASSWORD secret if you're running on Streamlit Cloud.
-    password='hsxhswshvshdwvvdh',
-)
-if not cookies.ready():
-    # Wait for the component to load and send us current cookies.
-    st.stop()
+from streamlit_cookies_manager import EncryptedCookieManager
+
+cook = EncryptedCookieManager(prefix="nomophobia_app" , password="fghhhjfjfhjvhfgc")
 # Custom CSS to support RTL (Right-to-Left) for Arabic
 st.markdown("""
 <style>
@@ -47,7 +39,10 @@ st.markdown("""
 
 </style>
 """, unsafe_allow_html=True)
-cook.load()
+if not cook.ready():
+    st.spinner()
+    st.stop()
+print(cook.get("visited"))
 if cook.get("visited") == 'true': 
     st.error("الرجاء تحديث الصفحة")
     st.stop()
@@ -152,7 +147,7 @@ with tab1[0]:
             file2.write(f"{reponse_21}\n")
 
             
-            cook.set("visited" , "true")
+            cook["visited"] = "true" 
             cook.save()
             st.success("تم الحفظ بنجاح")
             st.stop()

@@ -162,5 +162,5 @@ with tab1[0]:
             st.stop()
             st.experimental_rerun()
 
-        except :
-            st.error("حدث خطأ أثناء الحفظ")
+        except Exception as ex :
+            st.error("حدث خطأ أثناء الحفظ" + ex )

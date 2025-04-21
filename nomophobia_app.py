@@ -141,7 +141,7 @@ with tab1[0]:
                 result = "نتيجة عالية"
             elif total_score >= 80 and total_score <= 100 :
                 result = "نتيجة عالية جدا"
-            file1.write(f"{result}\n")
+                
             sql = "INSERT INTO scores (score) VALUES (%s)"
             val = (result , ) 
             mycursor.execute(sql, val)

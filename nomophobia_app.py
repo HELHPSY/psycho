@@ -151,7 +151,7 @@ with tab1[0]:
             reponse_21=responses[questions[-1]]
         
             sql = "INSERT INTO question (answer) VALUES (%s)"
-            val = (response_21 , ) 
+            val = (reponse_21 , ) 
             mycursor.execute(sql, val)
         
             mydb.commit()

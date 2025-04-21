@@ -161,8 +161,6 @@ with tab1[0]:
             cook["visited"] = "true" 
             cook.save()
             st.success("تم الحفظ بنجاح")
-            st.experimental_rerun()
-            st.stop()
-
+            st.rerun()
         except Exception as ex :
             st.error("حدث خطأ أثناء الحفظ" + str(ex) )

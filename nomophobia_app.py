@@ -13,7 +13,8 @@ mydb = mysql.connector.connect(
   host="sql7.freesqldatabase.com",
   user="sql7774384",
   password="3MKZzQs8DY" , 
-  database="sql7774384"
+  database="sql7774384" , 
+    charset ="utf8mb4" 
 )
 mycursor = mydb.cursor()
 # Custom CSS to support RTL (Right-to-Left) for Arabic

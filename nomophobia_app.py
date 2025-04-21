@@ -7,8 +7,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 from streamlit_cookies_manager import EncryptedCookieManager
-
+import mysql.connector
 cook = EncryptedCookieManager(prefix="nomophobia_app" , password="fghhhjfjfhjvhfgc")
+mydb = mysql.connector.connect(
+  host="sql7.freesqldatabase.com",
+  user="sql7774384",
+  password="3MKZzQs8DY"
+)
+mycursor = mydb.cursor()
 # Custom CSS to support RTL (Right-to-Left) for Arabic
 st.markdown("""
 <style>
@@ -125,10 +131,6 @@ with tab1[0]:
         reponse_21 = likert_options_2[response]
         submitted = st.form_submit_button("احسب النتيجة")
     if submitted :
-
-        try :
-            file1=open("RESULT.csv" , "a")
-            file2 = open("RESULT_2.csv" , "a")
             result =  None
             if ( total_score >= 20 and total_score <= 39) : 
                 result = "نتيجة منخفضة"
@@ -139,20 +141,25 @@ with tab1[0]:
             elif total_score >= 80 and total_score <= 100 :
                 result = "نتيجة عالية جدا"
             file1.write(f"{result}\n")
-
-
-
+            sql = "INSERT INTO scores (score) VALUES (%s)"
+            val = (result , ) 
+            mycursor.execute(sql, val)
+            
+            
 
             reponse_21=responses[questions[-1]]
-            file2.write(f"{reponse_21}\n")
-
+        
+            sql = "INSERT INTO question (answer) VALUES (%s)"
+            val = (response_21 , ) 
+            mycursor.execute(sql, val)
+        
+            mydb.commit()
             
             cook["visited"] = "true" 
             cook.save()
             st.success("تم الحفظ بنجاح")
             st.stop()
+            st.experimental_rerun()
 
-            file1.close()  
-            file2.close()
-        except FileNotFoundError:
+        except :
             st.error("حدث خطأ أثناء الحفظ")

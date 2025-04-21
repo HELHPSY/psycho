@@ -136,13 +136,13 @@ with tab1[0]:
         try : 
             result =  None
             if ( total_score >= 20 and total_score <= 39) : 
-                result = "نتيجة منخفضة"
+                result = "منخفض"
             elif total_score >= 40 and total_score <= 59:
-                result = "نتيجة متوسطة"
+                result = "متوسط"
             elif total_score >= 60 and total_score <= 79:
-                result = "نتيجة عالية"
+                result = "عالي"
             elif total_score >= 80 and total_score <= 100 :
-                result = "نتيجة عالية جدا"
+                result = "عالي جدا"
                 
             sql = "INSERT INTO scores (score) VALUES (%s)"
             val = (result , ) 

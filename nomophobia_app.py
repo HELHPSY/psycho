@@ -12,7 +12,8 @@ cook = EncryptedCookieManager(prefix="nomophobia_app" , password="fghhhjfjfhjvhf
 mydb = mysql.connector.connect(
   host="sql7.freesqldatabase.com",
   user="sql7774384",
-  password="3MKZzQs8DY"
+  password="3MKZzQs8DY" , 
+  database="sql7774384"
 )
 mycursor = mydb.cursor()
 # Custom CSS to support RTL (Right-to-Left) for Arabic

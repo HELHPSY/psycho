@@ -131,6 +131,7 @@ with tab1[0]:
         reponse_21 = likert_options_2[response]
         submitted = st.form_submit_button("احسب النتيجة")
     if submitted :
+        try : 
             result =  None
             if ( total_score >= 20 and total_score <= 39) : 
                 result = "نتيجة منخفضة"
